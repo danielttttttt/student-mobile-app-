@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DANN4</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">ወደ DANN4 እንኳን ደህና መጡ</string>
+    <string name="login_subtitle">የተማሪ ኮርስ ምዝገባ ሥርዓት</string>
+    <string name="hint_email">ኢሜይል አድራሻ</string>
+    <string name="hint_password">የይለፍ ቃል</string>
+    <string name="btn_login">ግባ</string>
+
+    <!-- Registration Screen -->
+    <string name="register_title">መለያ ፍጠር</string>
+    <string name="register_subtitle">ወደ DANN4 የተማሪ ሥርዓት ተቀላቀል</string>
+    <string name="hint_first_name">ስም</string>
+    <string name="hint_last_name">የአባት ስም</string>
+    <string name="hint_phone">ስልክ ቁጥር</string>
+    <string name="hint_department">ክፍል</string>
+    <string name="btn_register">ተመዝገብ</string>
+    <string name="btn_switch_to_login">መለያ አለዎት? ግባ</string>
+    <string name="btn_switch_to_register">መለያ የለዎትም? ተመዝገቡ</string>
+    <string name="user_registration_successful">ምዝገባ ተሳክቷል! ወደ DANN4 እንኳን ደህና መጡ!</string>
+    <string name="error_email_exists">ይህ ኢሜይል አስቀድሞ ተመዝግቧል</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">ዳሽቦርድ</string>
+    <string name="welcome_message">እንኳን ደህና መጣህ፣ %1$s!</string>
+    <string name="courses_registered">የተመዘገቡ ኮርሶች</string>
+    <string name="upcoming_deadlines">የሚመጡ የመጨረሻ ቀናት</string>
+    <string name="announcements">ማስታወቂያዎች</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">ዳሽቦርድ</string>
+    <string name="nav_courses">ኮርሶች</string>
+    <string name="nav_schedule">መርሃግብር</string>
+    <string name="nav_profile">ፕሮፋይል</string>
+    <string name="nav_settings">ቅንብሮች</string>
+    
+    <!-- Course List -->
+    <string name="course_list_title">ያሉ ኮርሶች</string>
+    <string name="search_courses">ኮርሶችን ፈልግ</string>
+    <string name="filter_by_department">በዲፓርትመንት አጣራ</string>
+    <string name="no_courses_found">ምንም ኮርሶች አልተገኙም</string>
+    
+    <!-- Course Details -->
+    <string name="course_details">የኮርስ ዝርዝሮች</string>
+    <string name="course_code">የኮርስ ኮድ</string>
+    <string name="course_title">ርዕስ</string>
+    <string name="course_description">መግለጫ</string>
+    <string name="course_credit_hours">የክሬዲት ሰዓታት</string>
+    <string name="course_instructor">መምህር</string>
+    <string name="course_department">ዲፓርትመንት</string>
+    <string name="course_semester">ሴሚስተር</string>
+    <string name="course_max_students">ከፍተኛ ተማሪዎች</string>
+
+    <string name="btn_register_course">ለኮርስ ተመዝገብ</string>
+    <string name="btn_drop">ኮርስ አቋርጥ</string>
+    
+    <!-- Registration -->
+    <string name="registration_title">የኮርስ ምዝገባ</string>
+    <string name="registration_success">በ%1$s ላይ በተሳካ ሁኔታ ተመዝግበዋል</string>
+    <string name="course_registration_failed">ምዝገባ አልተሳካም</string>
+    <string name="drop_success">%1$s በተሳካ ሁኔታ ተወግዷል</string>
+    <string name="course_drop_failed">ኮርስ ማቋረጥ አልተሳካም</string>
+    
+    <!-- Profile -->
+    <string name="profile_title">የተማሪ ፕሮፋይል</string>
+    <string name="student_name">ስም</string>
+    <string name="student_id">የተማሪ መታወቂያ</string>
+    <string name="student_email">ኢሜይል</string>
+    <string name="student_phone">ስልክ</string>
+    <string name="student_department">ዲፓርትመንት</string>
+    <string name="student_enrollment_date">የምዝገባ ቀን</string>
+    <string name="btn_edit_profile">ፕሮፋይል አርትዕ</string>
+    <string name="btn_change_photo">ፎቶ ቀይር</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">ቅንብሮች</string>
+    <string name="language">ቋንቋ</string>
+    <string name="theme">ገጽታ</string>
+    <string name="notifications">ማሳወቂያዎች</string>
+    <string name="about">ስለ</string>
+    <string name="logout">ውጣ</string>
+    
+    <!-- General -->
+    <string name="save">አስቀምጥ</string>
+    <string name="cancel">ሰርዝ</string>
+    <string name="delete">ሰርዝ</string>
+    <string name="edit">አርትዕ</string>
+    <string name="loading">በመጫን ላይ…</string>
+    <string name="error_occurred">ስህተት ተከስቷል</string>
+    <string name="try_again">እንደገና ሞክር</string>
+    <string name="yes">አዎ</string>
+    <string name="no">አይ</string>
+    <string name="error_invalid_email">እባክዎ ትክክለኛ ኢሜይል አድራሻ ያስገቡ</string>
+    <string name="error_required">ይህ መስክ ያስፈልጋል</string>
+
+    <!-- Profile Fragment -->
+    <string name="profile_image_updated">የመገለጫ ምስል ተዘምኗል</string>
+    <string name="error_saving_image">ምስል ማስቀመጥ ስህተት: %1$s</string>
+    <string name="permission_denied">ፈቃድ ተከልክሏል</string>
+    <string name="edit_profile_clicked">መገለጫ አርትዕ ተጫነ</string>
+    <string name="error_loading_profile">መገለጫ መጫን ስህተት</string>
+
+    <!-- Performance and Pagination -->
+    <string name="loading_more">ተጨማሪ በመጫን ላይ…</string>
+    <string name="no_more_items">ለመጫን ተጨማሪ ንጥሎች የሉም</string>
+    <string name="items_per_page">በገጽ ንጥሎች: %1$d</string>
+    <string name="page_info">ገጽ %1$d ከ %2$d</string>
+
+    <!-- Image Optimization -->
+    <string name="image_compressed">ምስል በተሳካ ሁኔታ ተጨመቀ</string>
+    <string name="image_compression_failed">ምስል ማጨማመቅ አልተሳካም</string>
+    <string name="image_too_large">ምስሉ በጣም ትልቅ ነው። እባክዎ ትንሽ ምስል ይምረጡ።</string>
+    <string name="max_image_size">ከፍተኛ የምስል መጠን: %1$s ሜባ</string>
+
+    <!-- Locale and Language -->
+    <string name="language_changed">ቋንቋ በተሳካ ሁኔታ ተቀይሯል</string>
+    <string name="restart_required">የቋንቋ ለውጦችን ለመተግበር እባክዎ መተግበሪያውን እንደገና ያስጀምሩ</string>
+    <string name="current_language">አሁን ያለ ቋንቋ: %1$s</string>
+    <string name="date_format_pattern">MMM dd, yyyy</string>
+    <string name="time_format_pattern">HH:mm</string>
+    <string name="switch_language">ቋንቋ ቀይር</string>
+    <string name="select_language">ቋንቋ ምረጥ</string>
+    <string name="english">English</string>
+    <string name="amharic">አማርኛ</string>
+
+    <!-- Error Messages -->
+    <string name="network_error">የኔትወርክ ግንኙነት ስህተት</string>
+    <string name="database_error">የመረጃ ቋት ስህተት ተከስቷል</string>
+    <string name="unknown_error">ያልታወቀ ስህተት ተከስቷል</string>
+    <string name="retry">እንደገና ሞክር</string>
+    <string name="dismiss">ዝጋ</string>
+
+    <!-- Dashboard -->
+    <string name="view_all">ሁሉንም ይመልከቱ</string>
+    <string name="view_all_courses">ሁሉንም ኮርሶች ይመልከቱ</string>
+    <string name="view_all_announcements">ሁሉንም ማስታወቂያዎች ይመልከቱ</string>
+    <string name="recent_courses">የተመዘገቡ ኮርሶች</string>
+    <string name="my_courses">የእኔ ኮርሶች</string>
+
+    <!-- Schedule -->
+    <string name="enrolled_courses_count">የተመዘገቡ ኮርሶች: %1$d</string>
+    <string name="no_enrolled_courses">የተመዘገቡ ኮርሶች አልተገኙም</string>
+    <string name="login_required">የጊዜ ሰሌዳዎን ለማየት እባክዎ ይግቡ</string>
+
+    <!-- Course Registration -->
+    <string name="register_for_course">ለኮርስ ተመዝገብ</string>
+    <string name="drop_course">ኮርስ አቋርጥ</string>
+    <string name="course_full">ኮርሱ ሞልቷል</string>
+    <string name="registration_successful">ለኮርሱ በተሳካ ሁኔታ ተመዝግበዋል</string>
+    <string name="registration_failed">ለኮርሱ መመዝገብ አልተሳካም</string>
+    <string name="drop_successful">ኮርሱን በተሳካ ሁኔታ አቋርጠዋል</string>
+    <string name="already_registered">ለዚህ ኮርስ ቀድሞውኑ ተመዝግበዋል</string>
+    <string name="prerequisite_not_met">ቅድመ ሁኔታዎች አልተሟሉም</string>
+    <string name="time_conflict">ከሌላ ኮርስ ጋር የጊዜ ግጭት</string>
+
+    <!-- Profile -->
+    <string name="permission_denied_storage">ፈቃድ ተከልክሏል</string>
+    <string name="edit_profile_feature">የመገለጫ አርትዕ ባህሪ በቅርቡ ይመጣል</string>
+</resources>

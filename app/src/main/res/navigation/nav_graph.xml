@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_dashboard">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.example.student3.ui.dashboard.DashboardFragment"
+        android:label="@string/dashboard_title"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_nav_dashboard_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_announcementList"
+            app:destination="@id/announcementListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_courses"
+        android:name="com.example.student3.ui.courses.CourseListFragment"
+        android:label="@string/course_list_title"
+        tools:layout="@layout/fragment_course_list">
+        <action
+            android:id="@+id/action_nav_courses_to_courseDetailFragment"
+            app:destination="@id/courseDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_schedule"
+        android:name="com.example.student3.ui.schedule.ScheduleFragment"
+        android:label="@string/nav_schedule"
+        tools:layout="@layout/fragment_schedule" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.student3.ui.profile.ProfileFragment"
+        android:label="@string/profile_title"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/courseDetailFragment"
+        android:name="com.example.student3.ui.courses.CourseDetailFragment"
+        android:label="@string/course_details"
+        tools:layout="@layout/fragment_course_detail">
+        <argument
+            android:name="courseId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/announcementListFragment"
+        android:name="com.example.student3.ui.announcements.AnnouncementListFragment"
+        android:label="@string/announcements_title"
+        tools:layout="@layout/fragment_announcement_list">
+        <action
+            android:id="@+id/action_announcementList_to_announcementDetail"
+            app:destination="@id/announcementDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/announcementDetailFragment"
+        android:name="com.example.student3.ui.announcements.AnnouncementDetailFragment"
+        android:label="@string/announcement_detail_title"
+        tools:layout="@layout/fragment_announcement_detail">
+        <argument
+            android:name="announcementId"
+            app:argType="integer" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="content"
+            app:argType="string" />
+        <argument
+            android:name="publishDate"
+            app:argType="string" />
+        <argument
+            android:name="isImportant"
+            app:argType="boolean" />
+    </fragment>
+
+</navigation>

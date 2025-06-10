@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <xml>
+        <![CDATA[
+        <data-extraction-rules>
+            <cloud-backup>
+                <include domain="sharedpref" path="."/>
+                <exclude domain="sharedpref" path="device.xml"/>
+            </cloud-backup>
+        </data-extraction-rules>
+        ]]>
+    </xml>
+</resources>

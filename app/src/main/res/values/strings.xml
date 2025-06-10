@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DANN4</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Welcome to DANN4</string>
+    <string name="login_subtitle">Student Course Registration System</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login</string>
+
+    <!-- Registration Screen -->
+    <string name="register_title">Create Account</string>
+    <string name="register_subtitle">Join DANN4 Student System</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_department">Department</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_switch_to_login">Already have an account? Login</string>
+    <string name="btn_switch_to_register">Don\'t have an account? Register</string>
+    <string name="user_registration_successful">Registration successful! Welcome to DANN4!</string>
+    <string name="error_email_exists">This email is already registered</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="welcome_message">Welcome, %1$s!</string>
+    <string name="courses_registered">Courses Registered</string>
+    <string name="upcoming_deadlines">Upcoming Deadlines</string>
+    <string name="announcements">Announcements</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_courses">Courses</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Course List -->
+    <string name="course_list_title">Available Courses</string>
+    <string name="search_courses">Search Courses</string>
+    <string name="filter_by_department">Filter by Department</string>
+    <string name="no_courses_found">No courses found</string>
+    <string name="show_all_courses">Show All Courses</string>
+    <string name="show_registered_courses">Show My Courses</string>
+
+    <!-- Course Details -->
+    <string name="course_details">Course Details</string>
+    <string name="course_code">Course Code</string>
+    <string name="course_title">Title</string>
+    <string name="course_description">Description</string>
+    <string name="course_credit_hours">Credit Hours</string>
+    <string name="course_instructor">Instructor</string>
+    <string name="course_department">Department</string>
+    <string name="course_semester">Semester</string>
+    <string name="course_max_students">Maximum Students</string>
+
+    <string name="btn_register_course">Register for Course</string>
+    <string name="btn_drop">Drop Course</string>
+
+    <!-- Registration -->
+    <string name="registration_title">Course Registration</string>
+    <string name="registration_success">Successfully registered for %1$s</string>
+    <string name="course_registration_failed">Registration failed</string>
+    <string name="drop_success">Successfully dropped %1$s</string>
+    <string name="course_drop_failed">Failed to drop course</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Student Profile</string>
+    <string name="student_name">Name</string>
+    <string name="student_id">Student ID</string>
+    <string name="student_email">Email</string>
+    <string name="student_phone">Phone</string>
+    <string name="student_department">Department</string>
+    <string name="student_enrollment_date">Enrollment Date</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+    <string name="btn_change_photo">Change Photo</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="language">Language</string>
+    <string name="theme">Theme</string>
+    <string name="notifications">Notifications</string>
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+
+    <!-- General -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="loading">Loading…</string>
+    <string name="error_occurred">An error occurred</string>
+    <string name="try_again">Try Again</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="error_invalid_email">Please enter a valid email address</string>
+    <string name="error_required">This field is required</string>
+
+    <!-- Add/Edit Course -->
+    <!-- Add/Edit Course -->
+    <string name="add_course" translatable="false">Add Course</string>
+    <string name="edit_course" translatable="false">Edit Course</string>
+    <string name="error_loading_course" translatable="false">Error loading course</string>
+    <string name="course_added" translatable="false">Course added successfully</string>
+    <string name="course_updated" translatable="false">Course updated successfully</string>
+
+    <!-- Profile Fragment -->
+    <string name="profile_image_updated">Profile image updated</string>
+    <string name="error_saving_image">Error saving image: %1$s</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="edit_profile_clicked">Edit profile clicked</string>
+    <string name="error_loading_profile">Error loading profile</string>
+
+    <!-- Performance and Pagination -->
+    <string name="loading_more">Loading more…</string>
+    <string name="no_more_items">No more items to load</string>
+    <string name="items_per_page">Items per page: %1$d</string>
+    <string name="page_info">Page %1$d of %2$d</string>
+
+    <!-- Image Optimization -->
+    <string name="image_compressed">Image compressed successfully</string>
+    <string name="image_compression_failed">Failed to compress image</string>
+    <string name="image_too_large">Image is too large. Please select a smaller image.</string>
+    <string name="max_image_size">Maximum image size: %1$s MB</string>
+
+    <!-- Locale and Language -->
+    <string name="language_changed">Language changed successfully</string>
+    <string name="restart_required">Please restart the app to apply language changes</string>
+    <string name="current_language">Current language: %1$s</string>
+    <string name="date_format_pattern">MMM dd, yyyy</string>
+    <string name="time_format_pattern">HH:mm</string>
+    <string name="switch_language">Switch Language</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">English</string>
+    <string name="amharic">አማርኛ</string>
+
+    <!-- Error Messages -->
+    <string name="network_error">Network connection error</string>
+    <string name="database_error">Database error occurred</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="retry">Retry</string>
+    <string name="dismiss">Dismiss</string>
+
+    <!-- Dashboard -->
+    <string name="view_all">View All</string>
+    <string name="view_all_courses">View All Courses</string>
+    <string name="view_all_announcements">View All Announcements</string>
+    <string name="recent_courses">Courses Registered</string>
+    <string name="my_courses">My Courses</string>
+
+    <!-- Schedule -->
+    <string name="enrolled_courses_count">Enrolled courses: %1$d</string>
+    <string name="no_enrolled_courses">No enrolled courses found</string>
+    <string name="login_required">Please log in to view your schedule</string>
+
+    <!-- Course Registration -->
+    <string name="register_for_course">Register for Course</string>
+    <string name="drop_course">Drop Course</string>
+    <string name="course_full">Course is full</string>
+    <string name="registration_successful">Successfully registered for course</string>
+    <string name="registration_failed">Failed to register for course</string>
+    <string name="drop_successful">Successfully dropped course</string>
+    <string name="already_registered">Already registered for this course</string>
+    <string name="prerequisite_not_met">Prerequisites not met</string>
+    <string name="time_conflict">Time conflict with another course</string>
+
+    <!-- Profile -->
+    <string name="permission_denied_storage">Permission denied</string>
+    <string name="edit_profile_feature">Edit profile feature coming soon</string>
+
+    <!-- Announcements -->
+    <string name="announcements_title">Announcements</string>
+    <string name="announcement_count">%1$d announcements</string>
+    <string name="unread_announcements">%1$d unread</string>
+    <string name="all_announcements">All</string>
+    <string name="unread_only">Unread</string>
+    <string name="important_only">Important</string>
+    <string name="mark_all_read">Mark All Read</string>
+    <string name="no_announcements">No announcements</string>
+    <string name="no_announcements_subtitle">Check back later for updates</string>
+    <string name="important_badge">IMPORTANT</string>
+    <string name="announcement_detail_title">Announcement Details</string>
+    <string name="mark_as_read">Mark as Read</string>
+    <string name="mark_as_unread">Mark as Unread</string>
+    <string name="share_announcement">Share</string>
+    <string name="copy_announcement">Copy Text</string>
+</resources>
