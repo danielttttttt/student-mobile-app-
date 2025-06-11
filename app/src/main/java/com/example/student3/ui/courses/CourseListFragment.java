@@ -38,7 +38,7 @@ import java.util.List;
  *
  * @author DANN4 Development Team
  * @version 1.0
- * @since 2024
+ * @since 2025
  */
 public class CourseListFragment extends Fragment implements CourseAdapter.OnCourseClickListener {
 
@@ -60,6 +60,11 @@ public class CourseListFragment extends Fragment implements CourseAdapter.OnCour
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Check if we should show only registered courses from arguments
+        if (getArguments() != null) {
+            showRegisteredOnly = getArguments().getBoolean("showRegisteredOnly", false);
+        }
 
         initViewModels();
         setupRecyclerView();

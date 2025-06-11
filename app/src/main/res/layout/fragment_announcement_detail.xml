@@ -60,7 +60,7 @@
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
             android:layout_marginBottom="24dp"
-            tools:text="December 15, 2024" />
+            tools:text="December 15, 2025" />
 
         <!-- Content Section -->
         <com.google.android.material.card.MaterialCardView

@@ -28,7 +28,7 @@ import com.example.student3.viewmodel.AnnouncementViewModel;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Announcement Detail View
- * @since 2024
+ * @since 2025
  */
 public class AnnouncementDetailFragment extends Fragment {
     private static final String TAG = "AnnouncementDetailFragment";

@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Secure Authentication Implementation
- * @since 2024
+ * @since 2025
  */
 public class PasswordUtils {
     private static final String TAG = "PasswordUtils";

@@ -19,7 +19,7 @@ import java.util.List;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Full Announcement Adapter
- * @since 2024
+ * @since 2025
  */
 public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.ViewHolder> {
     private List<Announcement> announcements;

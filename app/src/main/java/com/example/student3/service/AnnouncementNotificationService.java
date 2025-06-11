@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Background Notification Service
- * @since 2024
+ * @since 2025
  */
 public class AnnouncementNotificationService extends Service {
     private static final String TAG = "AnnouncementNotificationService";

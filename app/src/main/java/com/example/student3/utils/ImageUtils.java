@@ -28,7 +28,7 @@ import java.util.Locale;
  * 
  * @author DANN4 Development Team
  * @version 1.0
- * @since 2024
+ * @since 2025
  */
 public class ImageUtils {
     

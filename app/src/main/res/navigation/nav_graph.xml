@@ -26,6 +26,10 @@
         <action
             android:id="@+id/action_nav_courses_to_courseDetailFragment"
             app:destination="@id/courseDetailFragment" />
+        <argument
+            android:name="showRegisteredOnly"
+            app:argType="boolean"
+            android:defaultValue="false" />
 
     </fragment>
 

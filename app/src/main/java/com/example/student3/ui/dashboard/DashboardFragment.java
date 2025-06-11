@@ -37,7 +37,7 @@ import java.util.ArrayList;
  *
  * @author DANN4 Development Team
  * @version 1.0
- * @since 2024
+ * @since 2025
  */
 public class DashboardFragment extends Fragment {
 
@@ -153,13 +153,19 @@ public class DashboardFragment extends Fragment {
      * Sets up click listeners for navigation to full lists
      */
     private void setupClickListeners() {
-        // Navigate to courses list when clicking "View All" button
-        binding.tvViewAllCourses.setOnClickListener(v ->
-            Navigation.findNavController(v).navigate(R.id.nav_courses));
+        // Navigate to courses list when clicking "View All" button - show only registered courses
+        binding.tvViewAllCourses.setOnClickListener(v -> {
+            Bundle args = new Bundle();
+            args.putBoolean("showRegisteredOnly", true);
+            Navigation.findNavController(v).navigate(R.id.nav_courses, args);
+        });
 
-        // Navigate to courses list when clicking on courses RecyclerView
-        binding.recyclerRecentCourses.setOnClickListener(v ->
-            Navigation.findNavController(v).navigate(R.id.nav_courses));
+        // Navigate to courses list when clicking on courses RecyclerView - show only registered courses
+        binding.recyclerRecentCourses.setOnClickListener(v -> {
+            Bundle args = new Bundle();
+            args.putBoolean("showRegisteredOnly", true);
+            Navigation.findNavController(v).navigate(R.id.nav_courses, args);
+        });
 
         // Navigate to announcements list when clicking "View All" announcements button
         binding.tvViewAllAnnouncements.setOnClickListener(v ->

@@ -14,7 +14,7 @@ import java.util.Locale;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Secure Authentication Implementation
- * @since 2024
+ * @since 2025
  */
 public class LoginAttemptManager {
     private static final String TAG = "LoginAttemptManager";

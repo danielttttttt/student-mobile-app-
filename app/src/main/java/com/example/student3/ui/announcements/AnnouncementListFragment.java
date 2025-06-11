@@ -27,7 +27,7 @@ import java.util.ArrayList;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Announcement List View
- * @since 2024
+ * @since 2025
  */
 public class AnnouncementListFragment extends Fragment {
     private static final String TAG = "AnnouncementListFragment";

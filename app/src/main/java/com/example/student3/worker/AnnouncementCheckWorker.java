@@ -20,7 +20,7 @@ import java.util.List;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Background Announcement Checker
- * @since 2024
+ * @since 2025
  */
 public class AnnouncementCheckWorker extends Worker {
     private static final String TAG = "AnnouncementCheckWorker";

@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * 
  * @author DANN4 Development Team
  * @version 1.0 - Background Notification Manager
- * @since 2024
+ * @since 2025
  */
 public class BackgroundNotificationManager {
     private static final String TAG = "BackgroundNotificationManager";

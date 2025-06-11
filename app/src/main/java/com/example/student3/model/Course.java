@@ -19,8 +19,8 @@ public class Course {
     private int maxStudents;
 
     // New scheduling fields
-    private String startDate; // When the course starts (e.g., "2024-01-15")
-    private String endDate; // When the course ends (e.g., "2024-05-15")
+    private String startDate; // When the course starts (e.g., "2025-01-15")
+    private String endDate; // When the course ends (e.g., "2025-05-15")
     private String daysOfWeek; // Days when course meets (e.g., "MON,WED,FRI")
     private int startPeriod; // Starting period (1-8)
     private int endPeriod; // Ending period (1-8)
