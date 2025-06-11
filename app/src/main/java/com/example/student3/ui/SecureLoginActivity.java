@@ -18,6 +18,7 @@ import com.example.student3.model.Student;
 import com.example.student3.utils.UserSession;
 import com.example.student3.utils.PasswordUtils;
 import com.example.student3.utils.LoginAttemptManager;
+import com.example.student3.utils.LocaleUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
@@ -59,6 +60,7 @@ public class SecureLoginActivity extends AppCompatActivity {
 
     private void setupUI() {
         setupDepartmentSpinner();
+        setupLanguageSpinner();
         setupFormToggle();
         setupClickListeners();
     }
@@ -70,6 +72,70 @@ public class SecureLoginActivity extends AppCompatActivity {
 
         if (binding.spinnerDepartment != null) {
             binding.spinnerDepartment.setAdapter(adapter);
+        }
+    }
+
+    private void setupLanguageSpinner() {
+        // Get language names for display
+        String[] languageNames = LocaleUtils.getLanguageNames();
+        String[] languageCodes = LocaleUtils.getLanguageCodes();
+
+        // Create adapter with custom styling
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, languageNames) {
+            @Override
+            public View getView(int position, View convertView, android.view.ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                // Set text color to make it visible
+                if (view instanceof android.widget.TextView) {
+                    ((android.widget.TextView) view).setTextColor(getResources().getColor(R.color.text_primary));
+                }
+                return view;
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, android.view.ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                // Set text color for dropdown items
+                if (view instanceof android.widget.TextView) {
+                    ((android.widget.TextView) view).setTextColor(getResources().getColor(R.color.text_primary));
+                }
+                return view;
+            }
+        };
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        if (binding.spinnerLanguage != null) {
+            binding.spinnerLanguage.setAdapter(adapter);
+
+            // Set current language selection
+            String currentLanguage = LocaleUtils.getCurrentLanguage(this);
+            for (int i = 0; i < languageCodes.length; i++) {
+                if (languageCodes[i].equals(currentLanguage)) {
+                    binding.spinnerLanguage.setSelection(i);
+                    break;
+                }
+            }
+
+            // Set up language change listener
+            binding.spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String selectedLanguageCode = languageCodes[position];
+                    String currentLang = LocaleUtils.getCurrentLanguage(SecureLoginActivity.this);
+
+                    // Only change if different language selected
+                    if (!selectedLanguageCode.equals(currentLang)) {
+                        LocaleUtils.setLocale(SecureLoginActivity.this, selectedLanguageCode);
+                        // Recreate activity to apply language change
+                        recreate();
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // Do nothing
+                }
+            });
         }
     }
 

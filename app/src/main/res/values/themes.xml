@@ -31,6 +31,10 @@
         <item name="materialButtonStyle">@style/Widget.DANN4.Button</item>
         <item name="textInputStyle">@style/Widget.DANN4.TextInputLayout</item>
         <item name="cardViewStyle">@style/Widget.DANN4.CardView</item>
+
+        <!-- Menu styles -->
+        <item name="popupMenuStyle">@style/Widget.DANN4.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.DANN4.PopupMenu</item>
     </style>
     
     <!-- Button style -->
@@ -51,5 +55,22 @@
         <item name="cardBackgroundColor">@color/background_card</item>
         <item name="cardElevation">4dp</item>
         <item name="cardCornerRadius">8dp</item>
+    </style>
+
+    <!-- Popup Menu style -->
+    <style name="Widget.DANN4.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@color/background_card</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+
+    <!-- Popup Theme Overlay for Toolbar -->
+    <style name="ThemeOverlay.DANN4.PopupMenu" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="android:colorBackground">@color/background_card</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="colorSurface">@color/background_card</item>
+        <item name="colorOnSurface">@color/text_primary</item>
     </style>
 </resources>
