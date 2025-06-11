@@ -21,7 +21,6 @@ import com.example.student3.utils.LoginAttemptManager;
 import com.example.student3.utils.LocaleUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * Secure LoginActivity with proper password authentication
@@ -46,16 +45,48 @@ public class SecureLoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
-        // Initialize components
-        AppDatabase database = AppDatabase.getDatabase(this);
-        studentDao = database.studentDao();
-        userSession = new UserSession(this);
-        loginAttemptManager = new LoginAttemptManager(this);
+        // FORCE LIGHT THEME - Disable dark mode completely
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        setupUI();
+        try {
+            // Initialize view binding with error handling
+            binding = ActivityLoginBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+
+            // Initialize components with error handling
+            userSession = new UserSession(this);
+            loginAttemptManager = new LoginAttemptManager(this);
+
+            // Initialize database in background thread
+            new Thread(() -> {
+                try {
+                    AppDatabase database = AppDatabase.getDatabase(this);
+                    studentDao = database.studentDao();
+
+                    // Setup UI on main thread
+                    runOnUiThread(() -> {
+                        try {
+                            setupUI();
+                        } catch (Exception e) {
+                            Log.e(TAG, "UI setup failed", e);
+                            Toast.makeText(this, "UI setup error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e(TAG, "Database initialization failed", e);
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Database error. Please restart app.", Toast.LENGTH_LONG).show();
+                        finish();
+                    });
+                }
+            }).start();
+
+        } catch (Exception e) {
+            Log.e(TAG, "Error in onCreate", e);
+            Toast.makeText(this, "Error initializing app. Please restart.", Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     private void setupUI() {
@@ -241,73 +272,60 @@ public class SecureLoginActivity extends AppCompatActivity {
         binding.btnLogin.setEnabled(false);
         binding.btnLogin.setText("Logging in...");
 
-        CompletableFuture.supplyAsync(() -> {
+        new Thread(() -> {
             try {
                 // Get student from database
                 Student student = studentDao.getStudentByEmail(email);
-                if (student == null) {
-                    return null; // User not found
-                }
 
-                // Verify password
-                if (PasswordUtils.verifyPassword(password, student.getPasswordHash())) {
-                    return student; // Authentication successful
-                } else {
-                    return null; // Invalid password
-                }
+                runOnUiThread(() -> {
+                    binding.btnLogin.setEnabled(true);
+                    binding.btnLogin.setText("Login");
+
+                    if (student != null && PasswordUtils.verifyPassword(password, student.getPasswordHash())) {
+                        // Successful authentication
+                        loginAttemptManager.recordSuccessfulLogin(email);
+
+                        // Update last login date
+                        updateLastLoginDate(student);
+
+                        // Create user session
+                        userSession.createLoginSession(student);
+
+                        Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
+
+                        // Navigate to main activity
+                        Intent intent = new Intent(SecureLoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Authentication failed
+                        boolean shouldLock = loginAttemptManager.recordFailedAttempt(email);
+
+                        if (shouldLock) {
+                            String lockoutMessage = loginAttemptManager.getLockoutMessage(email);
+                            binding.tilEmail.setError(lockoutMessage);
+                            Toast.makeText(this, lockoutMessage, Toast.LENGTH_LONG).show();
+                        } else {
+                            int attempts = loginAttemptManager.getFailedAttemptCount(email);
+                            int maxAttempts = LoginAttemptManager.getMaxLoginAttempts();
+                            int remaining = maxAttempts - attempts;
+
+                            binding.tilPassword.setError("Invalid email or password");
+                            Toast.makeText(this,
+                                "Invalid credentials. " + remaining + " attempts remaining.",
+                                Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             } catch (Exception e) {
                 Log.e(TAG, "Error during authentication", e);
-                return null;
+                runOnUiThread(() -> {
+                    binding.btnLogin.setEnabled(true);
+                    binding.btnLogin.setText("Login");
+                    Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
+                });
             }
-        }).thenAccept(student -> {
-            runOnUiThread(() -> {
-                binding.btnLogin.setEnabled(true);
-                binding.btnLogin.setText("Login");
-
-                if (student != null) {
-                    // Successful authentication
-                    loginAttemptManager.recordSuccessfulLogin(email);
-                    
-                    // Update last login date
-                    updateLastLoginDate(student);
-                    
-                    // Create user session
-                    userSession.createLoginSession(student);
-                    
-                    Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    
-                    // Navigate to main activity
-                    Intent intent = new Intent(SecureLoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    // Authentication failed
-                    boolean shouldLock = loginAttemptManager.recordFailedAttempt(email);
-                    
-                    if (shouldLock) {
-                        String lockoutMessage = loginAttemptManager.getLockoutMessage(email);
-                        binding.tilEmail.setError(lockoutMessage);
-                        Toast.makeText(this, lockoutMessage, Toast.LENGTH_LONG).show();
-                    } else {
-                        int attempts = loginAttemptManager.getFailedAttemptCount(email);
-                        int maxAttempts = LoginAttemptManager.getMaxLoginAttempts();
-                        int remaining = maxAttempts - attempts;
-                        
-                        binding.tilPassword.setError("Invalid email or password");
-                        Toast.makeText(this, 
-                            "Invalid credentials. " + remaining + " attempts remaining.", 
-                            Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }).exceptionally(throwable -> {
-            runOnUiThread(() -> {
-                binding.btnLogin.setEnabled(true);
-                binding.btnLogin.setText("Login");
-                Toast.makeText(this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
-            });
-            return null;
-        });
+        }).start();
     }
 
     /**
@@ -381,17 +399,27 @@ public class SecureLoginActivity extends AppCompatActivity {
         binding.btnRegister.setEnabled(false);
         binding.btnRegister.setText("Registering...");
 
-        CompletableFuture.supplyAsync(() -> {
+        new Thread(() -> {
             try {
                 // Check if email already exists
                 if (studentDao.emailExists(email)) {
-                    return -1; // Email already exists
+                    runOnUiThread(() -> {
+                        binding.btnRegister.setEnabled(true);
+                        binding.btnRegister.setText("Register");
+                        binding.tilRegisterEmail.setError("This email is already registered");
+                    });
+                    return;
                 }
 
                 // Hash password securely
                 String passwordHash = PasswordUtils.hashPassword(password);
                 if (passwordHash == null) {
-                    return -2; // Password hashing failed
+                    runOnUiThread(() -> {
+                        binding.btnRegister.setEnabled(true);
+                        binding.btnRegister.setText("Register");
+                        Toast.makeText(this, "Password processing failed. Please try again.", Toast.LENGTH_SHORT).show();
+                    });
+                    return;
                 }
 
                 // Create student object
@@ -409,45 +437,44 @@ public class SecureLoginActivity extends AppCompatActivity {
 
                 // Insert into database
                 long studentId = studentDao.insert(newStudent);
-                return (int) studentId;
+
+                runOnUiThread(() -> {
+                    binding.btnRegister.setEnabled(true);
+                    binding.btnRegister.setText("Register");
+
+                    if (studentId > 0) {
+                        Toast.makeText(this, "Registration successful! Please login.", Toast.LENGTH_LONG).show();
+                        // Switch to login form and clear registration form
+                        clearRegistrationForm();
+                        isLoginMode = true;
+                        updateFormVisibility();
+                    } else {
+                        Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             } catch (Exception e) {
                 Log.e(TAG, "Error during registration", e);
-                return -3; // Registration failed
-            }
-        }).thenAccept(result -> {
-            runOnUiThread(() -> {
-                binding.btnRegister.setEnabled(true);
-                binding.btnRegister.setText("Register");
-
-                if (result > 0) {
-                    Toast.makeText(this, "Registration successful! Please login.", Toast.LENGTH_LONG).show();
-                    // Switch to login form and clear registration form
-                    clearRegistrationForm();
-                    isLoginMode = true;
-                    updateFormVisibility();
-                } else if (result == -1) {
-                    binding.tilRegisterEmail.setError("This email is already registered");
-                } else if (result == -2) {
-                    Toast.makeText(this, "Password processing failed. Please try again.", Toast.LENGTH_SHORT).show();
-                } else {
+                runOnUiThread(() -> {
+                    binding.btnRegister.setEnabled(true);
+                    binding.btnRegister.setText("Register");
                     Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
+                });
+            }
+        }).start();
     }
 
     /**
      * Update student's last login date
      */
     private void updateLastLoginDate(Student student) {
-        CompletableFuture.runAsync(() -> {
+        new Thread(() -> {
             try {
                 String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
                 studentDao.updateLastLoginDate(student.getEmail(), currentDate);
             } catch (Exception e) {
                 Log.e(TAG, "Error updating last login date", e);
             }
-        });
+        }).start();
     }
 
     /**

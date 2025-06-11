@@ -43,4 +43,8 @@ public class StudentRepository {
     public Student getStudentByEmail(String email) {
         return studentDao.getStudentByEmail(email);
     }
+
+    public void updateProfileImagePath(int studentId, String profileImagePath) {
+        AppDatabase.databaseWriteExecutor.execute(() -> studentDao.updateProfileImagePath(studentId, profileImagePath));
+    }
 }

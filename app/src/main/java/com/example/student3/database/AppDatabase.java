@@ -24,6 +24,7 @@ import com.example.student3.model.Registration;
 import com.example.student3.model.Semester;
 import com.example.student3.model.Student;
 import com.example.student3.model.UserProfile;
+import com.example.student3.utils.PasswordUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -264,6 +265,28 @@ public abstract class AppDatabase extends RoomDatabase {
 
         for (Announcement announcement : announcements) {
             db.announcementDao().insert(announcement);
+        }
+
+        // Add a test user for debugging login functionality
+        try {
+            // Create a test student with hashed password
+            Student testStudent = new Student();
+            testStudent.setFirstName("Test");
+            testStudent.setLastName("User");
+            testStudent.setEmail("test@dann4.com");
+            testStudent.setPhone("1234567890");
+            testStudent.setDepartmentId(1); // Computer Science
+            testStudent.setEnrollmentDate("2025-01-01");
+            // Generate proper password hash for "test123"
+            String passwordHash = PasswordUtils.hashPassword("test123");
+            testStudent.setPasswordHash(passwordHash);
+            testStudent.setLoginAttempts(0);
+            testStudent.setAccountLocked(false);
+            testStudent.setLastLoginDate(null);
+
+            db.studentDao().insert(testStudent);
+        } catch (Exception e) {
+            // Ignore if test user already exists
         }
 
         // Skip other sample data to avoid foreign key constraint issues

@@ -39,4 +39,8 @@ public class StudentViewModel extends AndroidViewModel {
     public void update(Student student) {
         repository.update(student);
     }
+
+    public void updateProfileImagePath(int studentId, String profileImagePath) {
+        repository.updateProfileImagePath(studentId, profileImagePath);
+    }
 }

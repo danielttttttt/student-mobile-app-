@@ -75,17 +75,21 @@ public class ProfileFragment extends Fragment {
                             android.util.Log.d("ProfileFragment", "Saved file verified. Size: " + savedImageFile.length() + " bytes");
 
                             if (currentStudent != null) {
-                                // Update the student object
+                                // Update profile image path in database using student ID
+                                int studentId = currentStudent.getStudentId();
+                                android.util.Log.d("ProfileFragment", "Updating profile image for student ID: " + studentId + " with path: " + imagePath);
+
+                                // Update database with new image path
+                                studentViewModel.updateProfileImagePath(studentId, imagePath);
+                                android.util.Log.d("ProfileFragment", "Updated profile image path in database");
+
+                                // Update UserSession with just the image path (preserve all other data)
+                                userSession.updateProfileImagePath(imagePath);
+                                android.util.Log.d("ProfileFragment", "Updated UserSession with new image path");
+
+                                // Update current student object to keep UI in sync
                                 currentStudent.setProfileImagePath(imagePath);
-                                android.util.Log.d("ProfileFragment", "Setting profile image path: " + imagePath);
-
-                                // Update database first
-                                studentViewModel.update(currentStudent);
-                                android.util.Log.d("ProfileFragment", "Updated student in database");
-
-                                // Update UserSession completely to ensure synchronization
-                                userSession.createLoginSession(currentStudent);
-                                android.util.Log.d("ProfileFragment", "Updated UserSession with complete student data including image path");
+                                android.util.Log.d("ProfileFragment", "Updated currentStudent object with new image path");
 
                                 // Load image from saved file path
                                 Glide.with(this).load(savedImageFile).circleCrop().into(binding.ivProfileImage);
@@ -223,24 +227,28 @@ public class ProfileFragment extends Fragment {
         InputStream inputStream = requireContext().getContentResolver().openInputStream(imageUri);
         if (inputStream == null) throw new Exception("Cannot open input stream");
 
-        // Use a fixed filename to avoid creating multiple files
+        // Use a fixed filename to avoid creating multiple files - this allows unlimited image changes
         String imageFileName = "profile_image_" + userSession.getCurrentUserId() + ".jpg";
         File storageDir = requireContext().getFilesDir();
         File imageFile = new File(storageDir, imageFileName);
 
-        // Delete existing file if it exists
+        // Always delete existing file if it exists to ensure clean replacement
         if (imageFile.exists()) {
             boolean deleted = imageFile.delete();
             android.util.Log.d("ProfileFragment", "Deleted existing profile image: " + deleted);
+            if (!deleted) {
+                android.util.Log.w("ProfileFragment", "Warning: Could not delete existing image file");
+            }
         }
 
+        // Create new image file
         try (OutputStream outputStream = new FileOutputStream(imageFile)) {
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096]; // Increased buffer size for better performance
             int bytesRead;
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
             }
-            outputStream.flush(); // Ensure data is written
+            outputStream.flush(); // Ensure data is written to disk
         } finally {
             inputStream.close();
         }
@@ -250,7 +258,7 @@ public class ProfileFragment extends Fragment {
             throw new Exception("Failed to save image file properly");
         }
 
-        android.util.Log.d("ProfileFragment", "Image saved successfully. Size: " + imageFile.length() + " bytes");
+        android.util.Log.d("ProfileFragment", "Image saved successfully. Size: " + imageFile.length() + " bytes, Path: " + imageFile.getAbsolutePath());
         return imageFile.getAbsolutePath();
     }
 

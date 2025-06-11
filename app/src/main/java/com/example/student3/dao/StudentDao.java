@@ -59,4 +59,7 @@ public interface StudentDao {
     @Query("UPDATE students SET loginAttempts = 0, accountLocked = 0 WHERE email = :email")
     void resetLoginAttempts(String email);
 
+    @Query("UPDATE students SET profileImagePath = :profileImagePath WHERE studentId = :studentId")
+    void updateProfileImagePath(int studentId, String profileImagePath);
+
 }

@@ -41,6 +41,8 @@
     <string name="search_courses">ኮርሶችን ፈልግ</string>
     <string name="filter_by_department">በዲፓርትመንት አጣራ</string>
     <string name="no_courses_found">ምንም ኮርሶች አልተገኙም</string>
+    <string name="show_all_courses">ሁሉንም ኮርሶች አሳይ</string>
+    <string name="show_registered_courses">የእኔን ኮርሶች አሳይ</string>
     
     <!-- Course Details -->
     <string name="course_details">የኮርስ ዝርዝሮች</string>
@@ -158,4 +160,21 @@
     <!-- Profile -->
     <string name="permission_denied_storage">ፈቃድ ተከልክሏል</string>
     <string name="edit_profile_feature">የመገለጫ አርትዕ ባህሪ በቅርቡ ይመጣል</string>
+
+    <!-- Announcements -->
+    <string name="announcements_title">ማስታወቂያዎች</string>
+    <string name="announcement_count">%1$d ማስታወቂያዎች</string>
+    <string name="unread_announcements">%1$d ያልተነበቡ</string>
+    <string name="all_announcements">ሁሉም</string>
+    <string name="unread_only">ያልተነበቡ ብቻ</string>
+    <string name="important_only">አስፈላጊዎች ብቻ</string>
+    <string name="mark_all_read">ሁሉንም እንደተነበቡ ምልክት አድርግ</string>
+    <string name="no_announcements">ማስታወቂያዎች የሉም</string>
+    <string name="no_announcements_subtitle">ለዝማኔዎች በኋላ ይመለሱ</string>
+    <string name="important_badge">አስፈላጊ</string>
+    <string name="announcement_detail_title">የማስታወቂያ ዝርዝሮች</string>
+    <string name="mark_as_read">እንደተነበበ ምልክት አድርግ</string>
+    <string name="mark_as_unread">እንደማልተነበበ ምልክት አድርግ</string>
+    <string name="share_announcement">አጋራ</string>
+    <string name="copy_announcement">ጽሑፍ ቅዳ</string>
 </resources>

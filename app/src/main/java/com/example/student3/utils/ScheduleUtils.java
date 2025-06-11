@@ -1,7 +1,6 @@
 package com.example.student3.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -147,6 +146,20 @@ public class ScheduleUtils {
             case "SUN": return "Sunday";
             default: return dayAbbr;
         }
+    }
+
+    /**
+     * Format period start time for display
+     * @param period Period number (1-8)
+     * @return Formatted start time (e.g., "2:30 PM")
+     */
+    public static String formatPeriodTime(int period) {
+        if (period < 1 || period > TOTAL_PERIODS) {
+            return "TBD";
+        }
+
+        int startMinutes = 150 + (period - 1) * MINUTES_PER_PERIOD;
+        return formatTime(startMinutes);
     }
     
     /**

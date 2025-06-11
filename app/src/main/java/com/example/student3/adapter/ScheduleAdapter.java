@@ -33,6 +33,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
 
     private List<Registration> registrations;
     private Map<Integer, Course> courseMap; // Map courseId to Course object
+    private Map<Integer, String> instructorMap; // Map instructorId to instructor name
     private OnScheduleItemClickListener listener;
 
     public interface OnScheduleItemClickListener {
@@ -88,10 +89,25 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         notifyDataSetChanged();
     }
 
+    public void setInstructorMap(Map<Integer, String> instructorMap) {
+        this.instructorMap = instructorMap;
+        notifyDataSetChanged();
+    }
+
+    public void updateScheduleWithInstructors(List<Registration> newRegistrations,
+                                            Map<Integer, Course> newCourseMap,
+                                            Map<Integer, String> newInstructorMap) {
+        this.registrations = newRegistrations;
+        this.courseMap = newCourseMap;
+        this.instructorMap = newInstructorMap;
+        notifyDataSetChanged();
+    }
+
     class ScheduleViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvCourseCode;
         private final TextView tvCourseTitle;
         private final TextView tvTimeSlot;
+        private final TextView tvInstructor;
         private final TextView tvStatus;
         private final TextView tvGrade;
         private final View statusIndicator;
@@ -101,6 +117,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             tvCourseCode = itemView.findViewById(R.id.tv_course_code);
             tvCourseTitle = itemView.findViewById(R.id.tv_course_title);
             tvTimeSlot = itemView.findViewById(R.id.tv_time_slot);
+            tvInstructor = itemView.findViewById(R.id.tv_instructor);
             tvStatus = itemView.findViewById(R.id.tv_status);
             tvGrade = itemView.findViewById(R.id.tv_grade);
             statusIndicator = itemView.findViewById(R.id.status_indicator);
@@ -133,6 +150,21 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
                     course.getEndPeriod()
                 );
                 tvTimeSlot.setText(scheduleText);
+
+                // Display instructor information
+                if (instructorMap != null && course.getInstructorId() != null) {
+                    String instructorName = instructorMap.get(course.getInstructorId());
+                    if (instructorName != null && !instructorName.isEmpty()) {
+                        tvInstructor.setText(instructorName);
+                        tvInstructor.setVisibility(View.VISIBLE);
+                    } else {
+                        tvInstructor.setText("Instructor TBD");
+                        tvInstructor.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    tvInstructor.setText("Instructor TBD");
+                    tvInstructor.setVisibility(View.VISIBLE);
+                }
             } else {
                 // Fallback to basic registration info
                 tvCourseCode.setText("COURSE-" + registration.getCourseId());

@@ -1,6 +1,8 @@
 package com.example.student3.ui.schedule;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import com.example.student3.utils.UserSession;
 import com.example.student3.utils.ScheduleUtils;
 import com.example.student3.viewmodel.RegistrationViewModel;
 import com.example.student3.viewmodel.CourseViewModel;
+import com.example.student3.viewmodel.InstructorViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
@@ -51,10 +54,14 @@ public class ScheduleFragment extends Fragment {
     private FragmentScheduleBinding binding;
     private RegistrationViewModel registrationViewModel;
     private CourseViewModel courseViewModel;
+    private InstructorViewModel instructorViewModel;
     private ScheduleAdapter scheduleAdapter;
     private PeriodAdapter periodAdapter;
     private UserSession userSession;
     private Map<Integer, Course> courseMap = new HashMap<>();
+    private Map<Integer, String> instructorMap = new HashMap<>();
+    private List<Registration> allRegistrations = new ArrayList<>();
+    private List<Registration> filteredRegistrations = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +75,7 @@ public class ScheduleFragment extends Fragment {
 
         initializeComponents();
         setupRecyclerView();
+        setupSearchAndFilter();
         setupTabs();
         setupCalendar();
         observeScheduleData();
@@ -76,6 +84,7 @@ public class ScheduleFragment extends Fragment {
     private void initializeComponents() {
         registrationViewModel = new ViewModelProvider(this).get(RegistrationViewModel.class);
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        instructorViewModel = new ViewModelProvider(this).get(InstructorViewModel.class);
         userSession = new UserSession(requireContext());
     }
 
@@ -84,6 +93,45 @@ public class ScheduleFragment extends Fragment {
         binding.recyclerSchedule.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerSchedule.setAdapter(scheduleAdapter);
     }
+
+    private void setupSearchAndFilter() {
+        // Setup search functionality
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterSchedule(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private void filterSchedule(String query) {
+        if (query.isEmpty()) {
+            filteredRegistrations = new ArrayList<>(allRegistrations);
+        } else {
+            filteredRegistrations = new ArrayList<>();
+            for (Registration registration : allRegistrations) {
+                Course course = courseMap.get(registration.getCourseId());
+                if (course != null) {
+                    String searchText = (course.getCourseCode() + " " + course.getTitle()).toLowerCase();
+                    if (searchText.contains(query.toLowerCase())) {
+                        filteredRegistrations.add(registration);
+                    }
+                }
+            }
+        }
+
+        // Update adapter with filtered results
+        scheduleAdapter.updateScheduleWithInstructors(filteredRegistrations, courseMap, instructorMap);
+        updateScheduleSummary();
+    }
+
+
 
     private void observeScheduleData() {
         if (userSession.isLoggedIn()) {
@@ -126,16 +174,79 @@ public class ScheduleFragment extends Fragment {
 
     private void loadCoursesForRegistrations(List<Registration> registrations) {
         courseMap.clear();
+        instructorMap.clear();
+        allRegistrations = new ArrayList<>(registrations);
+        filteredRegistrations = new ArrayList<>(registrations);
+
         for (Registration registration : registrations) {
             courseViewModel.getCourseById(registration.getCourseId()).observe(getViewLifecycleOwner(), course -> {
                 if (course != null) {
                     courseMap.put(course.getCourseId(), course);
-                    // Update adapter when we have all courses loaded
-                    if (courseMap.size() == registrations.size()) {
-                        scheduleAdapter.updateSchedule(registrations, courseMap);
+
+                    // Load instructor information if available
+                    if (course.getInstructorId() != null) {
+                        instructorViewModel.getInstructorById(course.getInstructorId())
+                            .observe(getViewLifecycleOwner(), instructor -> {
+                                if (instructor != null) {
+                                    instructorMap.put(course.getInstructorId(), instructor.getFullName());
+                                }
+                                updateAdapterIfReady(registrations);
+                            });
+                    } else {
+                        updateAdapterIfReady(registrations);
                     }
                 }
             });
+        }
+    }
+
+    private void updateAdapterIfReady(List<Registration> registrations) {
+        // Update adapter when we have all courses loaded
+        if (courseMap.size() == registrations.size()) {
+            scheduleAdapter.updateScheduleWithInstructors(filteredRegistrations, courseMap, instructorMap);
+            updateScheduleSummary();
+            updateNextClassIndicator();
+        }
+    }
+
+    private void updateScheduleSummary() {
+        int totalCredits = 0;
+        for (Registration registration : filteredRegistrations) {
+            Course course = courseMap.get(registration.getCourseId());
+            if (course != null) {
+                totalCredits += course.getCreditHours();
+            }
+        }
+
+        binding.tvScheduleCount.setText(getString(R.string.enrolled_courses_count, filteredRegistrations.size()));
+        binding.tvTotalCredits.setText("Total Credits: " + totalCredits);
+    }
+
+    private void updateNextClassIndicator() {
+        // Find next class for today
+        Calendar now = Calendar.getInstance();
+        int currentDayOfWeek = now.get(Calendar.DAY_OF_WEEK);
+        int currentHour = now.get(Calendar.HOUR_OF_DAY);
+
+        Course nextCourse = null;
+        int nextPeriod = Integer.MAX_VALUE;
+
+        for (Registration registration : filteredRegistrations) {
+            Course course = courseMap.get(registration.getCourseId());
+            if (course != null && courseHasClassOnDay(course, currentDayOfWeek)) {
+                if (course.getStartPeriod() > currentHour && course.getStartPeriod() < nextPeriod) {
+                    nextCourse = course;
+                    nextPeriod = course.getStartPeriod();
+                }
+            }
+        }
+
+        if (nextCourse != null) {
+            String nextClassText = nextCourse.getCourseCode() + " at " +
+                                 ScheduleUtils.formatPeriodTime(nextPeriod);
+            binding.tvNextClass.setText(nextClassText);
+        } else {
+            binding.tvNextClass.setText("No classes today");
         }
     }
 

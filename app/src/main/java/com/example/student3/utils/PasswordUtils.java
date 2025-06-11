@@ -1,10 +1,10 @@
 package com.example.student3.utils;
 
+import android.util.Base64;
 import android.util.Log;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Base64;
 import java.util.regex.Pattern;
 
 /**
@@ -50,8 +50,8 @@ public class PasswordUtils {
             byte[] hashedPassword = md.digest(password.getBytes());
             
             // Encode salt and hash to Base64
-            String saltString = Base64.getEncoder().encodeToString(salt);
-            String hashString = Base64.getEncoder().encodeToString(hashedPassword);
+            String saltString = Base64.encodeToString(salt, Base64.DEFAULT);
+            String hashString = Base64.encodeToString(hashedPassword, Base64.DEFAULT);
             
             // Return format: salt:hash
             return saltString + ":" + hashString;
@@ -83,14 +83,14 @@ public class PasswordUtils {
             }
             
             // Decode salt and hash
-            byte[] salt = Base64.getDecoder().decode(parts[0]);
+            byte[] salt = Base64.decode(parts[0], Base64.DEFAULT);
             String expectedHash = parts[1];
-            
+
             // Hash the provided password with the same salt
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(salt);
             byte[] hashedPassword = md.digest(password.getBytes());
-            String actualHash = Base64.getEncoder().encodeToString(hashedPassword);
+            String actualHash = Base64.encodeToString(hashedPassword, Base64.DEFAULT);
             
             // Compare hashes
             return expectedHash.equals(actualHash);
