@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import com.example.student3.R;
 import com.example.student3.utils.BackgroundNotificationManager;
+import com.example.student3.utils.BatteryMonitorUtil;
 import com.example.student3.utils.NotificationHelper;
 import com.example.student3.utils.LocaleUtils;
 import com.example.student3.utils.UserSession;
@@ -78,6 +79,35 @@ public class MainActivity extends AppCompatActivity {
 
         // Set up the BottomNavigationView with the NavController
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        // Initialize battery monitoring
+        initializeBatteryMonitoring();
+    }
+
+    /**
+     * Initialize battery monitoring functionality
+     * This demonstrates BroadcastReceiver usage for system events
+     */
+    private void initializeBatteryMonitoring() {
+        try {
+            // Register dynamic battery receiver for detailed monitoring
+            BatteryMonitorUtil.registerBatteryReceiver(this);
+
+            // Log current battery status for debugging
+            String batteryStatus = BatteryMonitorUtil.getBatteryStatusDescription(this);
+            Log.d(TAG, "Current battery status: " + batteryStatus);
+
+            // Check if we should conserve battery and adjust app behavior
+            if (BatteryMonitorUtil.shouldConserveBattery(this)) {
+                Log.i(TAG, "Battery conservation mode activated");
+                // In a real app, you might:
+                // - Reduce background sync frequency
+                // - Disable non-essential animations
+                // - Postpone heavy operations
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize battery monitoring", e);
+        }
     }
 
     @Override
@@ -114,5 +144,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Clean up battery monitoring
+        try {
+            BatteryMonitorUtil.unregisterBatteryReceiver(this);
+            Log.d(TAG, "Battery monitoring cleaned up");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to cleanup battery monitoring", e);
+        }
     }
 }

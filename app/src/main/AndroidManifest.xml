@@ -49,6 +49,17 @@
             android:enabled="true"
             android:exported="false" />
 
+        <!-- BroadcastReceiver for battery level monitoring -->
+        <receiver
+            android:name=".receiver.BatteryLevelReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW" />
+                <action android:name="android.intent.action.BATTERY_OKAY" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
