@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Network &amp; Sync Settings"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+            android:textColor="@color/primary_color"
+            android:layout_marginBottom="24dp"
+            android:gravity="center" />
+
+        <!-- Network Status Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Network Status"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:textColor="@color/primary_color"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_network_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Network: Checking..."
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_last_sync"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last sync: Never"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/secondary_text_color" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text_sync_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ready to sync"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="@color/success_color"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Sync Controls Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sync Controls"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:textColor="@color/primary_color"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Enable Sync Switch -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Enable Sync"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Allow data synchronization with server"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/secondary_text_color" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_sync_enabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+
+                </LinearLayout>
+
+                <!-- Auto Sync Switch -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Auto Sync"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Automatically sync data in background"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/secondary_text_color" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_auto_sync"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+
+                </LinearLayout>
+
+                <!-- WiFi Only Switch -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WiFi Only"
+                            android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Only sync when connected to WiFi"
+                            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                            android:textColor="@color/secondary_text_color" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switch_wifi_only"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Action Buttons Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Actions"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                    android:textColor="@color/primary_color"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Manual Sync Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_manual_sync"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Manual Sync"
+                    android:layout_marginBottom="8dp"
+                    app:icon="@drawable/ic_sync"
+                    app:iconGravity="start" />
+
+                <!-- Test API Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_test_api"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Test API Connection"
+                    android:layout_marginBottom="8dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    app:icon="@drawable/ic_network_check"
+                    app:iconGravity="start" />
+
+                <!-- Sync Announcements Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_sync_announcements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sync Announcements"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    app:icon="@drawable/ic_announcement"
+                    app:iconGravity="start" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Info Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/info_background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ℹ️ Network Features Demo"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                    android:textColor="@color/info_text_color"
+                    android:layout_marginBottom="8dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This demonstrates network/API functionality for the school project. Features include:\n\n• REST API integration with Retrofit\n• Online/offline synchronization\n• Network status monitoring\n• Background sync capabilities\n• Conflict resolution handling"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="@color/info_text_color" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>

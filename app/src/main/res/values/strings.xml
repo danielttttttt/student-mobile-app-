@@ -185,4 +185,43 @@
     <string name="mark_as_unread">Mark as Unread</string>
     <string name="share_announcement">Share</string>
     <string name="copy_announcement">Copy Text</string>
+
+    <!-- To-Do List -->
+    <string name="nav_todos">To-Do</string>
+    <string name="todos_title">My To-Do List</string>
+    <string name="add_todo">Add Task</string>
+    <string name="edit_todo">Edit Task</string>
+    <string name="todo_title">Task Title</string>
+    <string name="select_course">Select Course</string>
+    <string name="due_date">Due Date</string>
+    <string name="priority">Priority</string>
+    <string name="description">Description</string>
+    <string name="save_todo">Save Task</string>
+    <string name="todo_saved">Task saved successfully</string>
+    <string name="todo_updated">Task updated successfully</string>
+    <string name="todo_deleted">Task deleted</string>
+    <string name="delete_todo">Delete Task</string>
+    <string name="delete_todo_confirm">Are you sure you want to delete this task?</string>
+    <string name="mark_completed">Mark as Completed</string>
+    <string name="mark_pending">Mark as Pending</string>
+    <string name="todo_completed">Task marked as completed</string>
+    <string name="todo_pending">Task marked as pending</string>
+    <string name="no_todos">No tasks yet</string>
+    <string name="no_todos_subtitle">Tap + to add your first task</string>
+    <string name="pending_todos">%1$d Pending</string>
+    <string name="completed_todos">%1$d Completed</string>
+    <string name="overdue_todos">Overdue</string>
+    <string name="due_today">Due Today</string>
+    <string name="priority_high">High</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_low">Low</string>
+    <string name="filter_all">All</string>
+    <string name="filter_pending">Pending</string>
+    <string name="filter_completed">Completed</string>
+    <string name="filter_overdue">Overdue</string>
+    <string name="due_format">Due: %1$s</string>
+    <string name="overdue_label">OVERDUE</string>
+    <string name="todo_title_required">Task title is required</string>
+    <string name="course_required">Please select a course</string>
+    <string name="due_date_required">Due date is required</string>
 </resources>

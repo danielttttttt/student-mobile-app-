@@ -32,6 +32,22 @@
     <color name="gradient_start">#4CAF50</color>
     <color name="gradient_end">#8BC34A</color>
     
+    <!-- Priority colors -->
+    <color name="priority_high">#F44336</color>
+    <color name="priority_medium">#FF9800</color>
+    <color name="priority_low">#4CAF50</color>
+    <color name="priority_high_bg">#FFEBEE</color>
+    <color name="priority_medium_bg">#FFF3E0</color>
+    <color name="priority_low_bg">#E8F5E8</color>
+
+    <!-- Network Settings Colors -->
+    <color name="primary_color">@color/primary</color>
+    <color name="secondary_text_color">@color/text_secondary</color>
+    <color name="background_color">@color/background_light</color>
+    <color name="success_color">@color/success</color>
+    <color name="info_background">#E3F2FD</color>
+    <color name="info_text_color">#1565C0</color>
+
     <!-- Default colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.student3.dao.AnnouncementDao;
+import com.example.student3.dao.SimpleTodoDao;
 import com.example.student3.dao.CourseDao;
 import com.example.student3.dao.DepartmentDao;
 import com.example.student3.dao.InstructorDao;
@@ -17,6 +18,7 @@ import com.example.student3.dao.SemesterDao;
 import com.example.student3.dao.StudentDao;
 import com.example.student3.dao.UserProfileDao;
 import com.example.student3.model.Announcement;
+import com.example.student3.model.SimpleTodo;
 import com.example.student3.model.Course;
 import com.example.student3.model.Department;
 import com.example.student3.model.Instructor;
@@ -37,8 +39,9 @@ import java.util.concurrent.Executors;
         Instructor.class,
         Semester.class,
         Announcement.class,
-        UserProfile.class
-}, version = 6, exportSchema = false)
+        UserProfile.class,
+        SimpleTodo.class
+}, version = 9, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract StudentDao studentDao();
@@ -49,6 +52,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract SemesterDao semesterDao();
     public abstract AnnouncementDao announcementDao();
     public abstract UserProfileDao userProfileDao();
+    public abstract SimpleTodoDao simpleTodoDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -90,6 +94,7 @@ public abstract class AppDatabase extends RoomDatabase {
         db.registrationDao().deleteAll();
         db.announcementDao().deleteAll();
         db.userProfileDao().deleteAll();
+        db.simpleTodoDao().deleteAll();
 
         // Add Departments - matching registration form order
         Department[] departments = {

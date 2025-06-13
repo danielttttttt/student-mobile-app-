@@ -6,7 +6,7 @@
         android:id="@+id/action_language"
         android:title="@string/switch_language"
         app:showAsAction="never">
-        
+
         <menu>
             <item
                 android:id="@+id/action_language_english"
@@ -15,7 +15,7 @@
                 android:id="@+id/action_language_amharic"
                 android:title="@string/amharic" />
         </menu>
-        
+
     </item>
     
 </menu>

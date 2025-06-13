@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/background_light">
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My To-Do List"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="16dp"
+        android:gravity="center" />
+
+    <!-- Add Todo Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/etNewTodo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Add a new task..."
+            android:padding="12dp"
+            android:background="@drawable/bg_edit_text"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnAddTodo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <!-- Filter Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnShowAll"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnShowPending"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnShowCompleted"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done" />
+
+    </LinearLayout>
+
+    <!-- Todo List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTodos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Empty State -->
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="No tasks yet!\nAdd your first task above."
+        android:textSize="16sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:visibility="gone" />
+
+</LinearLayout>
